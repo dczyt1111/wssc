@@ -1,0 +1,52 @@
+<view class="goods-container">
+  <!-- 商品图片轮播 -->
+  <swiper class="goods-swiper" indicator-dots="{{true}}" autoplay="{{false}}">
+    <block wx:for="{{goods.images}}" wx:key="*this">
+      <swiper-item>
+        <image src="/zp/zhij.png" mode="aspectFill"></image>
+      </swiper-item>
+    </block>
+  </swiper>
+  
+  <!-- 商品基本信息 -->
+  <view class="goods-info">
+    <view class="price-section">
+      <text class="current-price">¥{{goods.price}}</text>
+      <text class="original-price" wx:if="{{goods.originalPrice}}">¥{{goods.originalPrice}}</text>
+      <text class="discount" wx:if="{{goods.discount}}">{{goods.discount}}折</text>
+    </view>
+    <view class="title">{{goods.name}}</view>
+    <view class="sales">销量: {{goods.sales}}件</view>
+    <view class="express">快递: {{goods.express || '免运费'}}</view>
+  </view>
+  
+  <!-- 商品规格选择 -->
+  <view class="spec-section">
+    <view class="spec-list">
+      <block wx:for="{{goods.specs}}" wx:key="name">
+        <view class="spec-item">
+          <view class="spec-values">
+            <block wx:for="{{item.values}}" wx:key="*this">
+              
+            </block>
+          </view>
+        </view>
+      </block>
+    </view>
+  </view>
+  
+  <!-- 商品详情 -->
+  <view class="detail-section">
+    <view class="section-title">商品详情</view>
+    
+  </view>
+</view>
+
+<!-- 底部操作栏 -->
+<view class="footer">
+  <view class="footer-btn cart" bindtap="addToCart">
+    <image src="https://m.360buyimg.com/mobilecms/s750x750_jfs/t1/204407/12/31678/312202/6409941bF95d0041d/4139883d9242e026.jpg"></image>
+    <text class="cart-btn" >购物车</text>
+  </view>
+  <view class="footer-btn buy" bindtap="buyNow">立即购买</view>
+</view>

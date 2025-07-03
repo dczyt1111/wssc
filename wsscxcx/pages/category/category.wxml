@@ -1,0 +1,63 @@
+<view class="category-container">
+  <!-- 左侧分类导航 -->
+  <scroll-view scroll-y class="nav-scroll">
+    <block wx:for="{{categories}}" wx:key="id">
+      <view 
+        class="nav-item {{activeCategoryId === item.id ? 'active' : ''}}" 
+        bindtap="switchCategory" 
+        data-id="{{item.id}}"
+      >
+        {{item.name}}
+      </view>
+    </block>
+  </scroll-view>
+
+  <!-- 右侧商品内容 -->
+  <scroll-view 
+    scroll-y 
+    class="content-scroll" 
+    scroll-top="{{scrollTop}}"
+    bindscroll="onContentScroll"
+  >
+    <!-- 当前分类的banner -->
+    <image 
+      class="category-banner" 
+      src="/zp/商品1.jpg" 
+      mode="widthFix"
+    ></image>
+
+    <!-- 子分类 -->
+    <view class="sub-categories" wx:if="{{currentCategory.children && currentCategory.children.length}}">
+      <view 
+        class="sub-item" 
+        wx:for="{{currentCategory.children}}" 
+        wx:key="id"
+        bindtap="navigateToSubCategory"
+        data-id="{{item.id}}"
+      >
+        <image class="sub-image" src="https://dsfs.oppo.com/archives/201812/201812290512555c274433bfabb.jpg"></image>
+        <text class="sub-name">{{item.name}}</text>
+      </view>
+    </view>
+
+    <!-- 商品列表 -->
+    <view class="goods-list">
+      <view class="section-title">热门推荐</view>
+      <view class="goods-grid">
+        <block wx:for="{{goodsList}}" wx:key="id">
+          <view class="goods-item" bindtap="navigateToDetail" data-id="{{item.id}}">
+            <image class="goods-image" src="https://dsfs.oppo.com/archives/201812/201812290512555c274433bfabb.jpg"></image>
+            <view class="goods-name">{{item.name}}</view>
+            <view class="goods-price">¥{{item.price}}</view>
+          </view>
+        </block>
+      </view>
+    </view>
+
+    <!-- 加载更多 -->
+    <view class="load-more">
+      <text wx:if="{{isLoading}}">加载中...</text>
+      <text wx:if="{{!hasMore && !isLoading}}">没有更多了</text>
+    </view>
+  </scroll-view>
+</view>

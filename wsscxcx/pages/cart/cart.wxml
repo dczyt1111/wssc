@@ -1,0 +1,40 @@
+<view class="cart-container">
+  <!-- 购物车列表 -->
+  <view class="cart-list">
+    <block wx:for="{{cartItems}}" wx:key="id">
+      <view class="cart-item">
+        <view class="checkbox">
+          <checkbox checked="{{item.checked}}" bindtap="toggleCheck" data-id="{{item.id}}"></checkbox>
+        </view>
+        <image class="goods-image" src="/zp/zhij.webp"></image>
+        <view class="goods-info">
+          <view class="goods-name">{{item.name}}</view>
+          <view class="goods-spec">{{item.specs}}</view>
+          <view class="goods-price">
+            <text class="current-price">¥{{item.price}}</text>
+            <view class="quantity">
+              <text class="btn minus" bindtap="decreaseQuantity" data-id="{{item.id}}">-</text>
+              <text class="num">{{item.quantity}}</text>
+              <text class="btn plus" bindtap="increaseQuantity" data-id="{{item.id}}">+</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </block>
+  </view>
+  
+  <!-- 底部结算栏 -->
+  <view class="settlement-bar">
+    <view class="select-all">
+      <checkbox checked="{{isAllChecked}}" bindtap="toggleAllCheck"></checkbox>
+      <text>全选</text>
+    </view>
+    <view class="total">
+      <text>合计: </text>
+      <text class="total-price">¥{{totalPrice}}</text>
+    </view>
+    <view class="settle-btn {{totalPrice > 0 ? 'active' : ''}}" bindtap="checkout">
+      结算({{checkedCount}})
+    </view>
+  </view>
+</view>

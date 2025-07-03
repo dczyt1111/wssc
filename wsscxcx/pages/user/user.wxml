@@ -1,0 +1,93 @@
+<view class="user-container">
+  <!-- 用户信息区域 -->
+  <view class="user-info" bindtap="navigateToLogin">
+    <view class="avatar">
+      <image src="{{userInfo.avatarUrl || '/zp/tx.jpg'}}"></image>
+    </view>
+    <view class="info" wx:if="{{isLogin}}">
+      <view class="nickname">{{userInfo.nickName || '微信用户'}}</view>
+      <view class="level">会员等级: {{userInfo.level || '普通会员'}}</view>
+    </view>
+    <view class="info" wx:else>
+      <view class="nickname">小猫老弟</view>
+      <view class="tips">享受更多服务</view>
+    </view>
+    <view class="arrow">
+      <image src="/assets/icons/arrow-right.png"></image>
+    </view>
+  </view>
+  
+  <!-- 订单状态 -->
+  <view class="order-status">
+    <view class="header">
+      <text>我的订单</text>
+      <text class="view-all" bindtap="navigateToOrderList">查看全部 ></text>
+    </view>
+    <view class="status-list">
+      <view class="status-item" bindtap="navigateToOrderList" data-status="1">
+        <image src="/zp/dfk.png"></image>
+        <text>待付款</text>
+        <text class="badge" wx:if="{{orderCount.waitPay > 0}}">{{orderCount.waitPay}}</text>
+      </view>
+      <view class="status-item" bindtap="navigateToOrderList" data-status="2">
+        <image src="/zp/dfh.png"></image>
+        <text>待发货</text>
+        <text class="badge" wx:if="{{orderCount.waitDeliver > 0}}">{{orderCount.waitDeliver}}</text>
+      </view>
+      <view class="status-item" bindtap="navigateToOrderList" data-status="3">
+        <image src="/zp/dfh.png"></image>
+        <text>待收货</text>
+        <text class="badge" wx:if="{{orderCount.waitReceive > 0}}">{{orderCount.waitReceive}}</text>
+      </view>
+      <view class="status-item" bindtap="navigateToOrderList" data-status="2">
+        <image src="/zp/dpj.png"></image>
+        <text>待评价</text>
+        <text class="badge" wx:if="{{orderCount.waitComment > 0}}">{{orderCount.waitComment}}</text>
+      </view>
+      <view class="status-item" bindtap="navigateToAfterSale">
+        <image src="/zp/tk.png"></image>
+        <text>退款/售后</text>
+        <text class="badge" wx:if="{{orderCount.afterSale > 0}}">{{orderCount.afterSale}}</text>
+      </view>
+    </view>
+  </view>
+  
+  <!-- 功能入口 -->
+  <view class="function-list">
+    <view class="function-item" bindtap="navigateToAddress">
+      <view class="left">
+        <image src="/zp/dfh.png"></image>
+        <text>收货地址</text>
+      </view>
+      <image class="arrow" src="/assets/icons/arrow-right.png"></image>
+    </view>
+    <view class="function-item" bindtap="navigateToCoupon">
+      <view class="left">
+        <image src="/zp/优惠券.png"></image>
+        <text>我的优惠券</text>
+      </view>
+      <image class="arrow" src="/assets/icons/arrow-right.png"></image>
+    </view>
+    <view class="function-item" bindtap="navigateToCollect">
+      <view class="left">
+        <image src="/zp/收藏.png"></image>
+        <text>我的收藏</text>
+      </view>
+      <image class="arrow" src="/assets/icons/arrow-right.png"></image>
+    </view>
+    <view class="function-item" bindtap="navigateToCustomerService">
+      <view class="left">
+        <image src="/zp/联系客服.png"></image>
+        <text>联系客服</text>
+      </view>
+      <image class="arrow" src="/assets/icons/arrow-right.png"></image>
+    </view>
+    <view class="function-item" bindtap="navigateToSetting">
+      <view class="left">
+        <image src="/zp/设置.png"></image>
+        <text>设置</text>
+      </view>
+      <image class="arrow" src="/assets/icons/arrow-right.png"></image>
+    </view>
+  </view>
+</view>
